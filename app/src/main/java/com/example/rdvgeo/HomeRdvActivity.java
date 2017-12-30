@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class HomeRdvActivity extends AppCompatActivity {
     BroadcastReceiver broadcastReceiver;
 
     private ListView mListView;
+    private LinearLayout mLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class HomeRdvActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_rdv);
 
         mListView = (ListView) findViewById(R.id.rdvlist);
+        mLinearLayout = (LinearLayout) findViewById(R.id.linear_home);
+
         dbHelper = new RendezVousGeoLocDbHelper(this);
         //dbHelper.onDowngrade(dbHelper,1,1);
         this.deleteDatabase(DATABASE_NAME);
@@ -52,24 +56,7 @@ public class HomeRdvActivity extends AppCompatActivity {
 
         // get all rdvs
         //dbHelper.getAllRDV();
-        BroadcastReceiver broadcastReceiver =  new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
 
-                Bundle bundle = intent.getExtras();
-
-                String incoming_number= bundle.getString("phone_num");
-                double incoming_longitude = bundle.getDouble("longitude");
-                double incoming_latitude = bundle.getDouble("latitude");
-                Log.d("incoming number", "" + incoming_number);
-                Log.d("incoming longitude", "" + incoming_longitude);
-                Log.d("incoming latitude", "" + incoming_latitude);
-                //LinearLayout layout = findViewById(R.id.linear_home);
-
-            }
-        };
-//then register receiver like that :
-        registerReceiver(broadcastReceiver, new IntentFilter("mycustombroadcast"));
     }
 
     @Override
@@ -100,17 +87,48 @@ public class HomeRdvActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter("mycustombroadcast");
+        //Log.d("cc","cccc");
+        broadcastReceiver =  new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                Bundle bundle = intent.getExtras();
+
+                String incoming_number= bundle.getString("phone_num");
+                double incoming_longitude = bundle.getDouble("longitude");
+                double incoming_latitude = bundle.getDouble("latitude");
+                Log.d("incoming number", "" + incoming_number);
+                Log.d("incoming longitude", "" + incoming_longitude);
+                Log.d("incoming latitude", "" + incoming_latitude);
+
+
+                TextView tv = new TextView(context);
+                tv.setText(incoming_number);
+                mLinearLayout.addView(tv);
+                //Log.d("cc","ccccccccc");
+
+            }
+        };
+//then register receiver like that :
+        this.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-        if (broadcastReceiver != null)
-        unregisterReceiver(broadcastReceiver);
+        //if (broadcastReceiver != null)
+        this.unregisterReceiver(this.broadcastReceiver);
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (broadcastReceiver != null)
-        unregisterReceiver(broadcastReceiver);
+
     }
 }
 

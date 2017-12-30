@@ -270,6 +270,7 @@ public class NouveauRdvActivity extends AppCompatActivity {
                 else {
                     if (requestSMSPermission())
                         sendSMS(phoneNumbers[i], message);
+                    finish();
                 }
 
             }

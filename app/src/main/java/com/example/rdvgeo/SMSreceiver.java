@@ -30,7 +30,7 @@ public class SMSreceiver extends BroadcastReceiver {
             Log.d("Longitude ", "" + loc[0]);
             Log.d("Latitude ", "" + loc[1]);
 
-            Bundle extras = intent.getExtras();
+            //Bundle extras = intent.getExtras();
             Intent i = new Intent("mycustombroadcast");
             i.putExtra("phone_num", numero);
             i.putExtra("longitude",loc[0]);
