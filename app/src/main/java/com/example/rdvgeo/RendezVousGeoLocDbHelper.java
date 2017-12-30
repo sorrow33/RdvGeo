@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,28 +35,31 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
     private static final String KEY_GROUPE = "groupe";
 
 
-    private static final String[] COLUMNS = {KEY_ID,KEY_TITRE,KEY_LATITUDE,KEY_LONGITUDE,KEY_GROUPE};
+    private static final String[] COLUMNS = {KEY_ID, KEY_TITRE, KEY_LATITUDE, KEY_LONGITUDE, KEY_GROUPE};
 
 
     public RendezVousGeoLocDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create book table
         String CREATE_RENDEZVOUS_TABLE = "CREATE TABLE rendezvous ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "titre TEXT, "+
-                "latitude REAL, "+
-                "longitude REAL, "+
+                "titre TEXT, " +
+                "latitude REAL, " +
+                "longitude REAL, " +
                 "groupe INTEGER)";
         db.execSQL(CREATE_RENDEZVOUS_TABLE);
     }
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL("DROP TABLE IF EXISTS rendezvous");
         onCreate(db);
     }
+
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
@@ -86,7 +88,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Rendezvous getRDV(int id){
+    public Rendezvous getRDV(int id) {
 
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
@@ -96,7 +98,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
                 db.query(TABLE_RENDEZVOUS, // a. table
                         COLUMNS, // b. column names
                         " id = ?", // c. selections
-                        new String[] { String.valueOf(id) }, // d. selections args
+                        new String[]{String.valueOf(id)}, // d. selections args
                         null, // e. group by
                         null, // f. having
                         null, // g. order by
@@ -115,7 +117,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
 
         //log
-        Log.d("getRDV("+id+")", rdv.toString());
+        Log.d("getRDV(" + id + ")", rdv.toString());
 
         // 5. return book
         return rdv;
@@ -167,8 +169,8 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         // 3. updating row
         int i = db.update(TABLE_RENDEZVOUS, //table
                 values, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(rdv.getId()) }); //selection args
+                KEY_ID + " = ?", // selections
+                new String[]{String.valueOf(rdv.getId())}); //selection args
 
         // 4. close
         db.close();
@@ -183,8 +185,8 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
 
         // 2. delete
         db.delete(TABLE_RENDEZVOUS, //table name
-                KEY_ID+" = ?",  // selections
-                new String[] { String.valueOf(rdv.getId()) }); //selections args
+                KEY_ID + " = ?",  // selections
+                new String[]{String.valueOf(rdv.getId())}); //selections args
 
         // 3. close
         db.close();

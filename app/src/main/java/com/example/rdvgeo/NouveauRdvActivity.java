@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class NouveauRdvActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     static final int PICK_CONTACT_REQUEST = 1;  // The request code
     static final int SEND_SMS_REQUEST = 2;  // The request code
@@ -73,16 +73,16 @@ public class MainActivity extends AppCompatActivity {
         longitudetv = (TextView) findViewById(R.id.textView4);
         latitudetv = (TextView) findViewById(R.id.textView6);
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
+        if (ActivityCompat.checkSelfPermission(NouveauRdvActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) + ActivityCompat
-                .checkSelfPermission(MainActivity.this,
+                .checkSelfPermission(NouveauRdvActivity.this,
                         Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestLocationPermission();
 
         } else {
 
-            startService(new Intent(MainActivity.this, GeoLoc.class));
+            startService(new Intent(NouveauRdvActivity.this, GeoLoc.class));
 
         }
     }
@@ -110,29 +110,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
+        if (ContextCompat.checkSelfPermission(NouveauRdvActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) + ContextCompat
-                .checkSelfPermission(MainActivity.this,
+                .checkSelfPermission(NouveauRdvActivity.this,
                         Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale
-                    (MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                    (NouveauRdvActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ||
                     ActivityCompat.shouldShowRequestPermissionRationale
-                            (MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                            (NouveauRdvActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 Snackbar.make(findViewById(android.R.id.content),
                         "Please Grant Permissions",
                         Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
+                                ActivityCompat.requestPermissions(NouveauRdvActivity.this,
                                         new String[]{Manifest.permission
                                                 .ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                                         SEND_SMS_REQUEST);
                             }
                         }).show();
             } else {
-                ActivityCompat.requestPermissions(MainActivity.this,
+                ActivityCompat.requestPermissions(NouveauRdvActivity.this,
                         new String[]{Manifest.permission
                                 .ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
                         SEND_SMS_REQUEST);
@@ -144,24 +144,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean requestSMSPermission() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.SEND_SMS) + ContextCompat.checkSelfPermission(MainActivity.this,
+        if (ContextCompat.checkSelfPermission(NouveauRdvActivity.this,
+                Manifest.permission.SEND_SMS) + ContextCompat.checkSelfPermission(NouveauRdvActivity.this,
                 Manifest.permission.RECEIVE_SMS) + ContextCompat
-                .checkSelfPermission(MainActivity.this,
+                .checkSelfPermission(NouveauRdvActivity.this,
                         Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale
-                    (MainActivity.this, Manifest.permission.SEND_SMS) ||
+                    (NouveauRdvActivity.this, Manifest.permission.SEND_SMS) ||
                     ActivityCompat.shouldShowRequestPermissionRationale
-                            (MainActivity.this, Manifest.permission.READ_PHONE_STATE) || ActivityCompat.shouldShowRequestPermissionRationale
-                    (MainActivity.this, Manifest.permission.RECEIVE_SMS)) {
+                            (NouveauRdvActivity.this, Manifest.permission.READ_PHONE_STATE) || ActivityCompat.shouldShowRequestPermissionRationale
+                    (NouveauRdvActivity.this, Manifest.permission.RECEIVE_SMS)) {
                 Snackbar.make(findViewById(android.R.id.content),
                         "Please Grant Permissions",
                         Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
+                                ActivityCompat.requestPermissions(NouveauRdvActivity.this,
                                         new String[]{Manifest.permission
                                                 .SEND_SMS, Manifest.permission
                                                 .RECEIVE_SMS, Manifest.permission.READ_PHONE_STATE},
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }).show();
             } else {
-                ActivityCompat.requestPermissions(MainActivity.this,
+                ActivityCompat.requestPermissions(NouveauRdvActivity.this,
                         new String[]{Manifest.permission
                                 .SEND_SMS, Manifest.permission
                                 .RECEIVE_SMS, Manifest.permission.READ_PHONE_STATE},
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String formatPhoneNumber(String s) {
-        return s = s.replaceAll("\\D+", "");
+        return s.replaceAll("\\D+", "");
     }
 
     public String[] getPhoneNumber() {

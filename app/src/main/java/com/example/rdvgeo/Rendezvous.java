@@ -1,11 +1,4 @@
-
 package com.example.rdvgeo;
-
-import android.location.Location;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * File: ${FILE_NAME}
@@ -36,28 +29,28 @@ public class Rendezvous {
         return id;
     }
 
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
-    }
-
-    public int getGroupe() {
-        return groupe;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getLatitude() {
+        return latitude;
     }
 
     public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
+    public float getLongitude() {
+        return longitude;
+    }
+
     public void setLongitude(float longitude) {
         this.longitude = longitude;
+    }
+
+    public int getGroupe() {
+        return groupe;
     }
 
     public void setGroupe(int groupe) {

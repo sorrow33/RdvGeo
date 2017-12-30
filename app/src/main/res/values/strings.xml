@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">RdvGeo</string>
-    <string name="action_annuler">annuler</string>
     <string name="action_nouveau">nouveau</string>
+    <string name="action_annuler">annuler</string>
 </resources>

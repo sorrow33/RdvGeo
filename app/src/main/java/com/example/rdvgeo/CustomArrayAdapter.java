@@ -1,4 +1,3 @@
-
 package com.example.rdvgeo;
 
 import android.content.Context;

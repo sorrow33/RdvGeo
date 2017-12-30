@@ -1,10 +1,8 @@
-
 package com.example.rdvgeo;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -73,8 +71,10 @@ public class HomeRdvActivity extends AppCompatActivity {
     }
 
     public void nouveauRdv() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NouveauRdvActivity.class);
         startActivity(intent);
     }
 
 }
+
+
