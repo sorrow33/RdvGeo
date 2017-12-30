@@ -259,7 +259,7 @@ public class NouveauRdvActivity extends AppCompatActivity {
         String message;
         String[] phoneNumbers;
 
-        message = getMessage();
+        message = demandeRdv(localisationToString());
         phoneNumbers = getPhoneNumber();
 
         if (!message.isEmpty())
@@ -283,9 +283,17 @@ public class NouveauRdvActivity extends AppCompatActivity {
         smsManager.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
+    public String demandeRdv (String localisation) {
+        String s;
+        s = "RDVGeo : Nouvelle demande de rendez-vous \n" +
+                "Localisation : " + localisation + "\n" +
+                "Accepter ou rejeter ?";
+        return s;
+    }
 
-    public String getMessage() {
-        return "" + getLatitude() + getLongitude();
+    // (Longitude;Latitude)
+    public String localisationToString() {
+        return "(" + getLongitude() + ";" + getLatitude() + ")";
     }
 
     public String formatPhoneNumber(String s) {
