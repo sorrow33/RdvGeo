@@ -17,6 +17,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -83,6 +85,28 @@ public class MainActivity extends AppCompatActivity {
             startService(new Intent(MainActivity.this, GeoLoc.class));
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //ajoute les entrées de menu_test à l'ActionBar
+        getMenuInflater().inflate(R.menu.menu_nouveau_rdv, menu);
+        return true;
+    }
+
+    //gère le click sur une action de l'ActionBar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_annuler:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     private boolean requestLocationPermission() {
@@ -272,10 +296,5 @@ public class MainActivity extends AppCompatActivity {
         String delim = "[,]";
         String[] tokens = (this.phoneNumbers.getText().toString()).split(delim);
         return tokens;
-    }
-
-
-    public void annuler(View view) {
-        finish();
     }
 }
