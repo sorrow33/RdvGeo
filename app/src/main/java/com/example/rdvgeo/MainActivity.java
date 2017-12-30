@@ -121,14 +121,16 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean requestSMSPermission() {
         if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.SEND_SMS) + ContextCompat
+                Manifest.permission.SEND_SMS) + ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.RECEIVE_SMS) + ContextCompat
                 .checkSelfPermission(MainActivity.this,
                         Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale
                     (MainActivity.this, Manifest.permission.SEND_SMS) ||
                     ActivityCompat.shouldShowRequestPermissionRationale
-                            (MainActivity.this, Manifest.permission.READ_PHONE_STATE)) {
+                            (MainActivity.this, Manifest.permission.READ_PHONE_STATE) || ActivityCompat.shouldShowRequestPermissionRationale
+                    (MainActivity.this, Manifest.permission.RECEIVE_SMS)) {
                 Snackbar.make(findViewById(android.R.id.content),
                         "Please Grant Permissions",
                         Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
@@ -137,14 +139,16 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 ActivityCompat.requestPermissions(MainActivity.this,
                                         new String[]{Manifest.permission
-                                                .SEND_SMS, Manifest.permission.READ_PHONE_STATE},
+                                                .SEND_SMS,Manifest.permission
+                                                .RECEIVE_SMS, Manifest.permission.READ_PHONE_STATE},
                                         SEND_SMS_REQUEST);
                             }
                         }).show();
             } else {
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission
-                                .SEND_SMS, Manifest.permission.READ_PHONE_STATE},
+                                .SEND_SMS,Manifest.permission
+                                .RECEIVE_SMS, Manifest.permission.READ_PHONE_STATE},
                         SEND_SMS_REQUEST);
             }
         } else {
@@ -271,4 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void annuler(View view) {
+        finish();
+    }
 }

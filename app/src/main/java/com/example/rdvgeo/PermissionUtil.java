@@ -6,8 +6,6 @@ public abstract class PermissionUtil {
     /**
      * Check that all given permissions have been granted by verifying that each entry in the
      * given array is of the value {@link PackageManager#PERMISSION_GRANTED}.
-     *
-     *
      */
     public static boolean verifyPermissions(int[] grantResults) {
         // At least one result must be checked.

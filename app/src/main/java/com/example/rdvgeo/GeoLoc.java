@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.widget.Toast;
 
 public class GeoLoc extends Service {
@@ -39,7 +38,7 @@ public class GeoLoc extends Service {
             Toast.makeText(getBaseContext(),
                     "Voici les coordonnées de votre téléphone : " + latitude + " " + longitude,
                     Toast.LENGTH_LONG).show();
-            sendBroadcast(true,longitude,latitude);
+            sendBroadcast(true, longitude, latitude);
         }
     };
 
@@ -55,7 +54,7 @@ public class GeoLoc extends Service {
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //locationMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000,
-              //      0, onLocationChange);
+            //      0, onLocationChange);
             locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0,
                     onLocationChange);
         }
@@ -74,8 +73,8 @@ public class GeoLoc extends Service {
         locationMgr.removeUpdates(onLocationChange);
     }
 
-    private void sendBroadcast(boolean success,double longitude,double latitude) {
-        Intent intent = new Intent ("message"); //put the same message as in the filter you used in the activity when registering the receiver
+    private void sendBroadcast(boolean success, double longitude, double latitude) {
+        Intent intent = new Intent("message"); //put the same message as in the filter you used in the activity when registering the receiver
         intent.putExtra("success", success);
         intent.putExtra("longitude", longitude);
         intent.putExtra("latitude", latitude);
