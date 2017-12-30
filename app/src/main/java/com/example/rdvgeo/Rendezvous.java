@@ -16,13 +16,16 @@ import java.util.Date;
 public class Rendezvous {
 
     private int id;
+    private String titre;
     private float latitude;
     private float longitude;
     private int groupe;
 
-    public Rendezvous(){}
+    public Rendezvous() {
+    }
 
-    public Rendezvous(float latitude, float longitude, int groupe) {
+    public Rendezvous(String titre, float latitude, float longitude, int groupe) {
+        this.titre = titre;
         this.latitude = latitude;
         this.longitude = longitude;
         this.groupe = groupe;
@@ -60,10 +63,19 @@ public class Rendezvous {
         this.groupe = groupe;
     }
 
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
     @Override
     public String toString() {
         return "Rendezvous{" +
                 "id=" + id +
+                ", titre='" + titre + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", groupe=" + groupe +

@@ -30,12 +30,13 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
 
     // RendezVous Table Columns names
     private static final String KEY_ID = "id";
+    private static final String KEY_TITRE = "titre";
     private static final String KEY_LATITUDE = "latitude";
     private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_GROUPE = "groupe";
 
 
-    private static final String[] COLUMNS = {KEY_ID,KEY_LATITUDE,KEY_LONGITUDE,KEY_GROUPE};
+    private static final String[] COLUMNS = {KEY_ID,KEY_TITRE,KEY_LATITUDE,KEY_LONGITUDE,KEY_GROUPE};
 
 
     public RendezVousGeoLocDbHelper(Context context) {
@@ -45,6 +46,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         // SQL statement to create book table
         String CREATE_RENDEZVOUS_TABLE = "CREATE TABLE rendezvous ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "titre TEXT, "+
                 "latitude REAL, "+
                 "longitude REAL, "+
                 "groupe INTEGER)";
@@ -69,6 +71,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(KEY_TITRE, rdv.getTitre()); // get titre
         values.put(KEY_LATITUDE, rdv.getLatitude()); // get latitude
         values.put(KEY_LONGITUDE, rdv.getLongitude()); // get latitude
         values.put(KEY_GROUPE, rdv.getGroupe()); // get groupe
@@ -106,9 +109,10 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         // 4. build book object
         Rendezvous rdv = new Rendezvous();
         rdv.setId(Integer.parseInt(cursor.getString(0)));
-        rdv.setLatitude(Float.parseFloat(cursor.getString(1)));
-        rdv.setLongitude(Float.parseFloat(cursor.getString(2)));
-        rdv.setGroupe(Integer.parseInt(cursor.getString(3)));
+        rdv.setTitre(cursor.getString(1));
+        rdv.setLatitude(Float.parseFloat(cursor.getString(2)));
+        rdv.setLongitude(Float.parseFloat(cursor.getString(3)));
+        rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
 
         //log
         Log.d("getRDV("+id+")", rdv.toString());
@@ -133,9 +137,10 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
             do {
                 rdv = new Rendezvous();
                 rdv.setId(Integer.parseInt(cursor.getString(0)));
-                rdv.setLatitude(Float.parseFloat(cursor.getString(1)));
-                rdv.setLongitude(Float.parseFloat(cursor.getString(2)));
-                rdv.setGroupe(Integer.parseInt(cursor.getString(3)));
+                rdv.setTitre(cursor.getString(1));
+                rdv.setLatitude(Float.parseFloat(cursor.getString(2)));
+                rdv.setLongitude(Float.parseFloat(cursor.getString(3)));
+                rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
 
                 // Add book to books
                 rdvs.add(rdv);
