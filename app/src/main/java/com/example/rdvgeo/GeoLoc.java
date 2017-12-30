@@ -74,7 +74,7 @@ public class GeoLoc extends Service {
     }
 
     private void sendBroadcast(boolean success, double longitude, double latitude) {
-        Intent intent = new Intent("message"); //put the same message as in the filter you used in the activity when registering the receiver
+        Intent intent = new Intent("message");
         intent.putExtra("success", success);
         intent.putExtra("longitude", longitude);
         intent.putExtra("latitude", latitude);
