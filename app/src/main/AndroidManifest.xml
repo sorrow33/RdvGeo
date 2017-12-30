@@ -15,22 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/theme">
-
-        <activity android:name=".HomeRdvActivity"
+        <activity
+            android:name=".HomeRdvActivity"
             android:label="Rendez-vous">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".NouveauRdvActivity"
-
-            android:label="Nouveau rendez-vous">
-
-        </activity>
+        <activity
+            android:name=".NouveauRdvActivity"
+            android:label="Nouveau rendez-vous"></activity>
 
         <receiver android:name=".SMSreceiver">
             <intent-filter android:priority="503420">
@@ -42,8 +38,6 @@
             android:name=".GeoLoc"
             android:enabled="true"
             android:exported="true" />
-
-
     </application>
 
 </manifest>
