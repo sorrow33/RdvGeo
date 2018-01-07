@@ -79,6 +79,7 @@ public class NouveauRdvActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestLocationPermission();
+            requestSMSPermission();
 
         } else {
 

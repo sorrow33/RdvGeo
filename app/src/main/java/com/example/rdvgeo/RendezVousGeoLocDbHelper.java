@@ -76,7 +76,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         values.put(KEY_TITRE, rdv.getTitre()); // get titre
         values.put(KEY_LATITUDE, rdv.getLatitude()); // get latitude
         values.put(KEY_LONGITUDE, rdv.getLongitude()); // get latitude
-        values.put(KEY_GROUPE, rdv.getGroupe()); // get groupe
+        //values.put(KEY_GROUPE, rdv.getGroupe()); // get groupe
 
 
         // 3. insert
@@ -114,7 +114,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         rdv.setTitre(cursor.getString(1));
         rdv.setLatitude(Float.parseFloat(cursor.getString(2)));
         rdv.setLongitude(Float.parseFloat(cursor.getString(3)));
-        rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
+        //rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
 
         //log
         Log.d("getRDV(" + id + ")", rdv.toString());
@@ -133,7 +133,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        // 3. go over each row, build book and add it to list
+        // 3. go over each item_rdv, build book and add it to list
         Rendezvous rdv = null;
         if (cursor.moveToFirst()) {
             do {
@@ -142,7 +142,7 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
                 rdv.setTitre(cursor.getString(1));
                 rdv.setLatitude(Float.parseFloat(cursor.getString(2)));
                 rdv.setLongitude(Float.parseFloat(cursor.getString(3)));
-                rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
+                //rdv.setGroupe(Integer.parseInt(cursor.getString(4)));
 
                 // Add book to books
                 rdvs.add(rdv);
@@ -164,9 +164,9 @@ public class RendezVousGeoLocDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("latitude", rdv.getLatitude()); // get latitude
         values.put("longitude", rdv.getLongitude()); // get longitude
-        values.put("groupe", rdv.getGroupe()); // get groupe
+        //values.put("groupe", rdv.getGroupe()); // get groupe
 
-        // 3. updating row
+        // 3. updating item_rdv
         int i = db.update(TABLE_RENDEZVOUS, //table
                 values, // column/value
                 KEY_ID + " = ?", // selections

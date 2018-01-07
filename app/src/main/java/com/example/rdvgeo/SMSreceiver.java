@@ -18,34 +18,44 @@ public class SMSreceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Toast.makeText(context, "ON RECEIVE BROADCAST", Toast.LENGTH_LONG).show();
-        Log.d("ON ", "RECEIVE");
         SmsMessage[] msgs = Telephony.Sms.Intents.getMessagesFromIntent(intent);
         SmsMessage smsMessage = msgs[0];
         String numero = smsMessage.getDisplayOriginatingAddress();
-        Log.d("Message",smsMessage.getDisplayMessageBody());
-
+        numero = numero.substring(numero.length()-4);
         if (isRDVGeoMessage(smsMessage.getDisplayMessageBody())) {
-            double[] loc = getLocalisation(smsMessage.getDisplayMessageBody());
-            Log.d("Longitude ", "" + loc[0]);
-            Log.d("Latitude ", "" + loc[1]);
 
-            //Bundle extras = intent.getExtras();
-            Intent i = new Intent("mycustombroadcast");
-            i.putExtra("phone_num", numero);
-            i.putExtra("longitude",loc[0]);
-            i.putExtra("latitude",loc[1]);
-            context.sendBroadcast(i);
+            if (isRDVDemande(smsMessage.getDisplayMessageBody())) {
+                double[] loc = getLocalisation(smsMessage.getDisplayMessageBody());
+                Log.d("Longitude ", "" + loc[0]);
+                Log.d("Latitude ", "" + loc[1]);
 
+                //Bundle extras = intent.getExtras();
+                Intent i = new Intent("mycustombroadcast");
+                i.putExtra("phone_num", numero);
+                i.putExtra("longitude", loc[0]);
+                i.putExtra("latitude", loc[1]);
+                context.sendBroadcast(i);
+                Toast.makeText(context, smsMessage.getDisplayMessageBody().toString(), Toast.LENGTH_SHORT).show();
+                HomeRdvActivity inst = HomeRdvActivity.instance();
+                Log.d("TAG", "" + Integer.parseInt(numero));
+                inst.updateList(new Rendezvous("Titre", Integer.parseInt(numero), loc[0], loc[1]));
+            }
+            else
+                Log.d("RDVGeo", "Reponse : On ne traite pas ce sms");
         }
         else
             Log.d("TAG", "On ne traite pas ce sms");
-
     }
 
 
     public boolean isRDVGeoMessage(String message){
         String regexRDV = "^RDVGeo";
+        Pattern rdvPattern = Pattern.compile(regexRDV);
+        Matcher m = rdvPattern.matcher(message);
+        return m.find();
+    }
+    public boolean isRDVDemande(String message) {
+        String regexRDV = "Nouvelle demande";
         Pattern rdvPattern = Pattern.compile(regexRDV);
         Matcher m = rdvPattern.matcher(message);
         return m.find();

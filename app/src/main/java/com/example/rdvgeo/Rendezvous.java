@@ -1,28 +1,22 @@
 package com.example.rdvgeo;
 
-/**
- * File: ${FILE_NAME}
- * Created: 30/12/2017
- * Last changed: 30/12/2017 15:15
- * Author: William
- */
-
 public class Rendezvous {
 
     private int id;
     private String titre;
-    private float latitude;
-    private float longitude;
+    private int emetteur;
+    private double latitude;
+    private double longitude;
     private int groupe;
 
     public Rendezvous() {
     }
 
-    public Rendezvous(String titre, float latitude, float longitude, int groupe) {
+    public Rendezvous(String titre,int emetteur, double longitude, double latitude) {
         this.titre = titre;
-        this.latitude = latitude;
+        this.emetteur = emetteur;
         this.longitude = longitude;
-        this.groupe = groupe;
+        this.latitude = latitude;
     }
 
     public int getId() {
@@ -33,7 +27,7 @@ public class Rendezvous {
         this.id = id;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -41,20 +35,12 @@ public class Rendezvous {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
     public void setLongitude(float longitude) {
         this.longitude = longitude;
-    }
-
-    public int getGroupe() {
-        return groupe;
-    }
-
-    public void setGroupe(int groupe) {
-        this.groupe = groupe;
     }
 
     public String getTitre() {
@@ -65,6 +51,14 @@ public class Rendezvous {
         this.titre = titre;
     }
 
+    public int getEmetteur() {
+        return emetteur;
+    }
+
+    public void setEmetteur(int emetteur) {
+        this.emetteur = emetteur;
+    }
+
     @Override
     public String toString() {
         return "Rendezvous{" +
@@ -72,7 +66,6 @@ public class Rendezvous {
                 ", titre='" + titre + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", groupe=" + groupe +
                 '}';
     }
 }
