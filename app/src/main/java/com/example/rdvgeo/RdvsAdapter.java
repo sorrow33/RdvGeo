@@ -1,6 +1,8 @@
 package com.example.rdvgeo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +20,9 @@ import java.util.List;
 public class RdvsAdapter extends ArrayAdapter<Rendezvous> {
 
 
-
     public RdvsAdapter(Context context, ArrayList<Rendezvous> rdvs) {
         super(context, 0, rdvs);
+
 
     }
 
@@ -42,6 +44,7 @@ public class RdvsAdapter extends ArrayAdapter<Rendezvous> {
             holder.tv4 = (TextView) convertView.findViewById(R.id.tvLatitude);
             holder.bt1 = (Button) convertView.findViewById(R.id.btAccepter);
             holder.bt2 = (Button) convertView.findViewById(R.id.btRefuser);
+            holder.bt3 = (Button) convertView.findViewById(R.id.btVoir);
             // initialize textview
             convertView.setTag(holder);
         } else {
@@ -77,6 +80,18 @@ public class RdvsAdapter extends ArrayAdapter<Rendezvous> {
                 smsManager.sendTextMessage(""+rdv.getEmetteur(), null, s, null, null);
             }
         });
+
+        holder.bt3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Creates an Intent that will load a map of San Francisco
+                Uri gmmIntentUri = Uri.parse("geo:"+ rdv.getLongitude()+", "+rdv.getLatitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                getContext().startActivity(mapIntent);
+            }
+        });
         // set the name to the text;
 
         return convertView;
@@ -90,5 +105,6 @@ public class RdvsAdapter extends ArrayAdapter<Rendezvous> {
         TextView tv4;
         Button bt1;
         Button bt2;
+        Button bt3;
     }
 }
