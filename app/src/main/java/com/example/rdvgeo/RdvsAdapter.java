@@ -86,7 +86,7 @@ public class RdvsAdapter extends ArrayAdapter<Rendezvous> {
             @Override
             public void onClick(View v) {
                 // Creates an Intent that will load a map of San Francisco
-                Uri gmmIntentUri = Uri.parse("geo:"+ rdv.getLongitude()+", "+rdv.getLatitude());
+                Uri gmmIntentUri = Uri.parse("geo:"+ rdv.getLongitude()+","+rdv.getLatitude()+"?q="+rdv.getLongitude()+","+rdv.getLatitude()+"(Rendez-vous)");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 getContext().startActivity(mapIntent);

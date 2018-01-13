@@ -45,7 +45,6 @@ public class NouveauRdvActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //put here whaterver you want your activity to do with the intent received
             boolean s = intent.getBooleanExtra("success", false);
             setLongitude(intent.getDoubleExtra("longitude", 0));
             setLatitude(intent.getDoubleExtra("latitude", 0));
@@ -288,6 +287,7 @@ public class NouveauRdvActivity extends AppCompatActivity {
     public String demandeRdv (String localisation) {
         String s;
         s = "RDVGeo : Nouvelle demande de rendez-vous \n" +
+                "http://rdvgeo.com/ \n" +
                 "Localisation : " + localisation + "\n" +
                 "Accepter ou rejeter ?";
         return s;
